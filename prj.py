@@ -127,7 +127,7 @@ tab2_layout =[
     [sg.Text("Enter your date of birth:\n"), sg.Input(size=(20, 30), key="_IN3_")],
     [sg.Text("WANT TO KNOW YOUR AGE?",)],
     [sg.Image(data=sg.EMOJI_BASE64_HAPPY_BIG_SMILE), sg.Button('YES', key='_YES_'),
-                         sg.Button('NO',key='_NO_')],
+                         sg.Button('NO')],
     [sg.Text("PROGRAMMED BY JTN..")]
                ]
 
@@ -142,7 +142,7 @@ tab3_layout = [
     [sg.Text("Select a number [1, 2, 3, 4]:\n"), sg.Input(size=(20, 30), key="inp2")],
     [sg.Text("Press YES to know your fortune..")],
      [sg.Image(data=sg.EMOJI_BASE64_HAPPY_BIG_SMILE), sg.Button('yes'),
-                         sg.Button('NO')],
+                         sg.Button('No')],
     [sg.Text("PROGRAMMED BY JTN..")]
 ]
 
@@ -194,9 +194,14 @@ while True:
     elif event == '_YES_':
         sg.theme('DarkBlue6')
         age_calc(event, values)
-    elif event == '_NO_':
+    elif event == 'NO':
         sg.theme('DarkBlue6')
         sg.popup(Text_to_speech('OOPS ! you have missed this interesting part')+'OOPS ! you have missed this interesting part',font="_12", image=sg.EMOJI_BASE64_WEARY, keep_on_top=True)
+    elif event == 'No':
+        sg.theme('DarkBlue6')
+        sg.popup(Text_to_speech(
+            'OOPS ! you have missed this interesting part') + 'OOPS ! you have missed this interesting part',
+                 font="_12", image=sg.EMOJI_BASE64_WEARY, keep_on_top=True)
     elif event == '1st':
         sg.theme('DarkBlue6')
         sg.popup(Text_to_speech('YEAH ! UNDOUBTEDLY ')+'YEAH ! UNDOUBTEDLY ',font="_12", image=sg.EMOJI_BASE64_HAPPY_RELIEF, keep_on_top=True)
