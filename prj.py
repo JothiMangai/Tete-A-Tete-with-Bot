@@ -21,7 +21,6 @@ def fortune_teller(event,values):
     color = str(values["inp1"])
 
     if color == "black" or color == "white":
-        sg.popup("Numbers 1, 2, 5, 6 are the only numbers allowed")
         number = int(values["inp2"])
         if number == 1:
             sg.popup(Text_to_speech("You'll 100% get what you want, be patient!")+"You'll 100% get what you want, be patient!",image=sg.EMOJI_BASE64_HAPPY_WINK,keep_on_top=True)
@@ -32,7 +31,8 @@ def fortune_teller(event,values):
         elif number == 4:
             sg.popup(Text_to_speech("You will become famous and everyone will love you!")+"You will become famous and everyone will love you!",image=sg.EMOJI_BASE64_HAPPY_HEARTS,keep_on_top=True)
         else:
-            sg.popup(Text_to_speech("Numbers 1, 2,3,4  are the only numbers allowed")+"All your hardwork will soon pay off !",image=sg.EMOJI_BASE64_WEARY,keep_on_top=True)
+            txt = "Numbers 1,2,3,4 are the only numbers allowed"
+            sg.popup(Text_to_speech(txt) + txt, image=sg.EMOJI_BASE64_WEARY, keep_on_top=True)
 
     elif color == "pink" or color == "purple":
 
@@ -213,6 +213,7 @@ while True:
         sg.theme('DarkBlue6')
         sg.popup(Text_to_speech('COOL ! THANK YOU')+'COOL ! THANK YOU',font="_12", image=sg.EMOJI_BASE64_HAPPY_HEARTS, keep_on_top=True)
     elif event=="yes":
+        sg.theme('DarkBlue6')
         fortune_teller(event,values)
     elif event == 'No':
         sg.theme('DarkBlue6')
