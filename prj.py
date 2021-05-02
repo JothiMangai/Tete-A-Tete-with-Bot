@@ -79,9 +79,7 @@ def fortune_teller(event,values):
 
 
 def age_calc(event, values):
-    global age_year
-    global age_month
-    global age_day
+    month= [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     birth_year = int(values["_IN1_"])
     birth_month = int(values["_IN2_"])
     birth_day = int(values["_IN3_"])
@@ -89,9 +87,20 @@ def age_calc(event, values):
       current_year = now.year
       current_month = now.month
       current_day = now.day
+      if (birth_day > current_day) :
+         current_day = current_day + month[birth_month - 1]
+         current_month = current_month - 1
+
+      if (birth_month > current_month):
+         current_year = current_year - 1
+         current_month = current_month + 12
+
+
+
       age_year = current_year - birth_year
       age_month = abs(current_month - birth_month)
       age_day = abs(current_day - birth_day)
+
       ans = "You are\n\n   " + str(age_year) + ":Years\n\n  " + str(age_month) + ":months \n\n  " + str(age_day) + ":days  old"
       sg.popup(Text_to_speech(ans) + ans, keep_on_top=True,font="_12")
 
@@ -127,7 +136,7 @@ tab2_layout =[
     [sg.Text("Enter your date of birth:\n"), sg.Input(size=(20, 30), key="_IN3_")],
     [sg.Text("WANT TO KNOW YOUR AGE?",)],
     [sg.Image(data=sg.EMOJI_BASE64_HAPPY_BIG_SMILE), sg.Button('YES', key='_YES_'),
-                         sg.Button('NO')],
+                         sg.Button('NO',key='_NO_')],
     [sg.Text("PROGRAMMED BY JTN..")]
                ]
 
@@ -142,7 +151,7 @@ tab3_layout = [
     [sg.Text("Select a number [1, 2, 3, 4]:\n"), sg.Input(size=(20, 30), key="inp2")],
     [sg.Text("Press YES to know your fortune..")],
      [sg.Image(data=sg.EMOJI_BASE64_HAPPY_BIG_SMILE), sg.Button('yes'),
-                         sg.Button('No')],
+                         sg.Button('NO')],
     [sg.Text("PROGRAMMED BY JTN..")]
 ]
 
@@ -194,14 +203,9 @@ while True:
     elif event == '_YES_':
         sg.theme('DarkBlue6')
         age_calc(event, values)
-    elif event == 'NO':
+    elif event == '_NO_':
         sg.theme('DarkBlue6')
         sg.popup(Text_to_speech('OOPS ! you have missed this interesting part')+'OOPS ! you have missed this interesting part',font="_12", image=sg.EMOJI_BASE64_WEARY, keep_on_top=True)
-    elif event == 'No':
-        sg.theme('DarkBlue6')
-        sg.popup(Text_to_speech(
-            'OOPS ! you have missed this interesting part') + 'OOPS ! you have missed this interesting part',
-                 font="_12", image=sg.EMOJI_BASE64_WEARY, keep_on_top=True)
     elif event == '1st':
         sg.theme('DarkBlue6')
         sg.popup(Text_to_speech('YEAH ! UNDOUBTEDLY ')+'YEAH ! UNDOUBTEDLY ',font="_12", image=sg.EMOJI_BASE64_HAPPY_RELIEF, keep_on_top=True)
